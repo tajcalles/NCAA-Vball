@@ -6,6 +6,9 @@ import axios from 'axios';
 class SchoolList extends React.Component {
   state = { name: [], conference: [], wins: [], losses: [] };
 
+  componentDidMount() {
+    axios.get('/api/')
+  }
 
 
   render() {

@@ -2,6 +2,11 @@ class Api::SchoolsController < ApplicationController
   before_start :set_schools, except: [:index, :create]
 
   def index
+    if name = params[:name]
+      render json: School.all.where(name: params[:name])
+    else
+      render json: School.all
+    end
   end
 
   def show
@@ -11,6 +16,11 @@ class Api::SchoolsController < ApplicationController
   end
 
   def update
+    if @school.update(school_params)
+      render json: @school
+    else
+      render json: { errors: @school.errors.full_messages.join(',0') }, status: :bad_request
+    end
   end
 
   def destroy
