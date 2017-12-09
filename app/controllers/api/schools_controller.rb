@@ -1,9 +1,9 @@
 class Api::SchoolsController < ApplicationController
-  before_start :set_schools, except: [:index, :create]
+  before_action :set_schools, except: [:index, :create]
 
   def index
-    if name = params[:name]
-      render json: School.all.where(name: params[:name])
+    if schooltype = params[:schooltype]
+      render json: School.all.where(schooltype: params[:schooltype])
     else
       render json: School.all
     end
@@ -19,7 +19,7 @@ class Api::SchoolsController < ApplicationController
     if @school.update(school_params)
       render json: @school
     else
-      render json: { errors: @school.errors.full_messages.join(',0') }, status: :bad_request
+      render json: { errors: @school.errors.full_messages.join(',') }, status: :bad_request
     end
   end
 
@@ -29,7 +29,7 @@ class Api::SchoolsController < ApplicationController
   private
 
   def school_params
-    params.require[:school].permit[:name, :conference, :wins, :losses]
+    params.require[:school].permit[:schooltype, :name, :conference, :wins, :losses]
   end
 
   def set_schools
