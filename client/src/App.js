@@ -4,6 +4,8 @@ import NCAAlogo from './images/ncaa-logo.jpg';
 import SchoolList from './components/SchoolList';
 
 class App extends Component {
+  state = { school: []};
+
   render() {
     return (
       <Container textAlign="center">
@@ -12,8 +14,6 @@ class App extends Component {
          NCAA Volleyball Tracker</Header>
          <SchoolList />
       </Container>
-
-
     );
   }
 }
